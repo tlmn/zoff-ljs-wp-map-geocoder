@@ -32,8 +32,14 @@ app.get("/getLocation", (req, res) => {
           data: {
             center: [data.lat, data.lon],
             boundingBox: [
-              [data.boundingbox[0], data.boundingbox[2]],
-              [data.boundingbox[1], data.boundingbox[3]],
+              [
+                parseFloat(data.boundingbox[0]),
+                parseFloat(data.boundingbox[2]),
+              ],
+              [
+                parseFloat(data.boundingbox[1]),
+                parseFloat(data.boundingbox[3]),
+              ],
             ],
           },
         });
