@@ -6,7 +6,9 @@ const port = 3000;
 const axios = require("axios");
 const cors = require("cors");
 
-app.use(cors({ origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN : "*" }));
+app.use(
+  cors({ origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN : "*" })
+);
 
 app.get("/getLocation", (req, res) => {
   const queryString = req.query.q
@@ -23,10 +25,17 @@ app.get("/getLocation", (req, res) => {
     })
     .then((response) => {
       if (typeof response.data[0] !== "undefined") {
+        let data = response.data[0];
         res.status(200);
         res.send({
           status: "ok",
-          data: { lat: response.data[0].lat, lon: response.data[0].lon },
+          data: {
+            center: [data.lat, data.lon],
+            boundingBox: [
+              [data.boundingbox[0], data.boundingbox[1]],
+              [data.boundingbox[2], data.boundingbox[3]],
+            ],
+          },
         });
       } else {
         res.status(500);
