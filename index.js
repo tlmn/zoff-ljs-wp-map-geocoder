@@ -6,7 +6,7 @@ const port = 3000;
 const axios = require("axios");
 const cors = require("cors");
 
-app.use(cors({ origin: process.env.API_KEY ? process.env.API_KEY : "*" }));
+app.use(cors({ origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN : "*" }));
 
 app.get("/getLocation", (req, res) => {
   const queryString = req.query.q
