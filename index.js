@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT ? process.env.PORT : 3000;
 const axios = require("axios");
 const cors = require("cors");
 
@@ -45,12 +45,12 @@ app.get("/getLocation", (req, res) => {
         });
       } else {
         res.status(500);
-        res.send({ status: "error", message: "no entity found" });
+        res.send({ status: "error", message: "No entity found" });
       }
     })
-    .catch((error) => {
+    .catch(() => {
       res.status(500);
-      res.send({ status: "error", message: "error in API request" });
+      res.send({ status: "error", message: "Error in API request" });
     });
 });
 
